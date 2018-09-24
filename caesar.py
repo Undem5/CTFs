@@ -1,34 +1,38 @@
-MAX_KEY_SIZE = len(SYMBOLS)
-SYMBOLS = "ABCDEFGHIJKLMNOPabdcefghijklmnop123456789"
+SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
+MAX_KEY_SIZE = len(SYMBOLS)
 def getMode():
     while True:
         print("Encrypt or Decrypt?")
-        mode = input().lower()
+        mode = raw_input().lower()
         if mode in ['encrypt', 'e','decrypt','d']:
             return mode
         else:
             continue
 
 def getMessage():
-    message = input("Enter your message")
+    print("Enter your message")
+    message = raw_input()
 
     return message
 
 def getKey():
     
     while True:
-        key = input("Enter the key")
-
-        if (key >= 0  and key < MAX_KEY_SIZE):
-            return key
+        print("Enter the key")
+        key = raw_input()
+        print type(key)
+        val = int(key)
+        if (val > 0  and val <= MAX_KEY_SIZE ) :
+            return val
         else:
-            continue
+            print("the key must be btw 0 and 52")
+
 def getTranslatedMessage(mode, message, key):
 
+    translated = ''
     if mode[0] == 'd':
         key = -key
-        translated = ''
 
 
     for symbol in message:
@@ -44,7 +48,6 @@ def getTranslatedMessage(mode, message, key):
                 symboleIndex -= MAX_KEY_SIZE
             elif (symboleIndex < 0):
                 symboleIndex += MAX_KEY_SIZE
-
             translated += SYMBOLS[symboleIndex]
 
 
